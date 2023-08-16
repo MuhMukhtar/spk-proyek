@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CreateUserController;
+use App\Http\Controllers\EditUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('products', ProductsController::class);
 Route::resource('about', AboutController::class);
 Route::resource('contact', ContactController::class);
+Route::resource('user', UserController::class);
+Route::resource('createUser', CreateUserController::class);
+Route::resource('editUser', EditUserController::class);
+
