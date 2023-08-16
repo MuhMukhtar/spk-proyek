@@ -91,7 +91,7 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a href="{{ route('login') }}"><button class="btn btn-outline-success"
+                                <a href="{{ route('login') }}"><button class="btn btn-block btn-outline-primary"
                                         type="">Login</button></a>
                             </li>
                         @endif

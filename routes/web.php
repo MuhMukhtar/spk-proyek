@@ -7,6 +7,12 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CreateUserController;
 use App\Http\Controllers\EditUserController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EditClientController;
+use App\Http\Controllers\CreateClientController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\EditProjectController;
+use App\Http\Controllers\CreateProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +38,10 @@ Route::resource('contact', ContactController::class);
 Route::resource('user', UserController::class);
 Route::resource('createUser', CreateUserController::class);
 Route::resource('editUser', EditUserController::class);
+Route::resource('client', ClientController::class);
+Route::resource('editClient', EditClientController::class);
+Route::resource('createClient', CreateClientController::class);
+Route::resource('project', ProjectController::class);
+Route::resource('editProject', EditProjectController::class);
+Route::resource('createProject', CreateProjectController::class);
 
