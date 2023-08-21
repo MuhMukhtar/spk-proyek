@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>ranking</h1>
+<h1>Review Project</h1>
 @endsection

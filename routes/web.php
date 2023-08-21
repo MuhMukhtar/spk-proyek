@@ -13,6 +13,9 @@ use App\Http\Controllers\CreateClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\EditProjectController;
 use App\Http\Controllers\CreateProjectController;
+use App\Http\Controllers\ReviewProjectController;
+use App\Http\Controllers\PerhitunganController;
+use App\Http\Controllers\RankingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +47,7 @@ Route::resource('createClient', CreateClientController::class);
 Route::resource('project', ProjectController::class);
 Route::resource('editProject', EditProjectController::class);
 Route::resource('createProject', CreateProjectController::class);
+Route::resource('reviewProject', ReviewProjectController::class);
+Route::resource('perhitungan', PerhitunganController::class);
+Route::resource('ranking', RankingController::class);
 
