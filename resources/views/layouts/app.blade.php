@@ -77,10 +77,10 @@
                                 <a class="nav-link" href="{{ route('user.index') }}">User</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('about.index') }}">Log In</a>
+                                <a class="nav-link" href="{{ route('client.index') }}">Client</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
+                                <a class="nav-link" href="{{ route('project.index') }}">Project</a>
                             </li>
                         </ul>
                     @endguest

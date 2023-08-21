@@ -1,5 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>client</h1>
+    <div class="container-fluid">
+        <a class="btn btn-outline-success" href="/"> +Add Client</a>
+        <br><br>
+    <table class="table">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th scope="col">Id</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Person Responsible</th>
+                <th scope="col">Contact Person</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Muhammad Mukhtar</td>
+                <td>mukhtar</td>
+                <td>mukhtar</td>
+                <td>
+                    <a href="{{ route('editUser.index') }}">
+                        <button type="button" class="btn btn-warning">Edit</button>
+                    </a>
+                    <a href="">
+                        <button type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {{-- @foreach ($barangs as $item)
+                <tr class="bg-secondary text-white">
+                    <th scope="row">{{ $item->id_barang }}</th>
+                    <td>{{ $item->kode_barang }}</td>
+                    <td>{{ $item->nama_barang }}</td>
+                    <td>{{ $item->kategori_barang }}</td>
+                    <td>{{ $item->harga_barang }}</td>
+                    <td>{{ $item->qty_barang }}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            @endforeach --}}
+        </tbody>
+    </table>
+    </div>
 @endsection
