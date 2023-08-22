@@ -35,12 +35,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['admin']], function () {
+    Route::resource('user', UserController::class);
+    Route::resource('createUser', CreateUserController::class);
+    Route::resource('editUser', EditUserController::class);
+});
 Route::resource('products', ProductsController::class);
 Route::resource('about', AboutController::class);
 Route::resource('contact', ContactController::class);
-Route::resource('user', UserController::class);
-Route::resource('createUser', CreateUserController::class);
-Route::resource('editUser', EditUserController::class);
 Route::resource('client', ClientController::class);
 Route::resource('editClient', EditClientController::class);
 Route::resource('createClient', CreateClientController::class);
