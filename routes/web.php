@@ -35,21 +35,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('products', ProductsController::class);
+Route::resource('about', AboutController::class);
+Route::resource('contact', ContactController::class);
+
 Route::group(['middleware' => ['admin']], function () {
     Route::resource('user', UserController::class);
     Route::resource('createUser', CreateUserController::class);
     Route::resource('editUser', EditUserController::class);
+    Route::resource('reviewProject', ReviewProjectController::class);
+    Route::resource('editProject', EditProjectController::class);
+    Route::resource('perhitungan', PerhitunganController::class);
 });
-Route::resource('products', ProductsController::class);
-Route::resource('about', AboutController::class);
-Route::resource('contact', ContactController::class);
+
 Route::resource('client', ClientController::class);
 Route::resource('editClient', EditClientController::class);
 Route::resource('createClient', CreateClientController::class);
 Route::resource('project', ProjectController::class);
-Route::resource('editProject', EditProjectController::class);
 Route::resource('createProject', CreateProjectController::class);
-Route::resource('reviewProject', ReviewProjectController::class);
-Route::resource('perhitungan', PerhitunganController::class);
 Route::resource('ranking', RankingController::class);
 

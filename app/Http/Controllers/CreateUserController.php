@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUserController extends Controller
 {
@@ -20,20 +23,30 @@ class CreateUserController extends Controller
         return view('admin.createUser');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'is_admin' => 'required',
+        ]);
+
+        $user = new user;
+        $user->name = $request->get('name');
+        $user->username = $request->get('username');
+        // $user->password = $request->get('password');
+        $user->password = Hash::make($request->get('password'));
+        // Hash::make($user->password = $request->get('password'));
+        // $user->password = $request->get(Hash::make('password'));
+        $user->is_admin = $request->get('is_admin');;
+
+        User::create($request->all());
+        return redirect()->route('user.index')->with('success','Product created successfully.');
+
+        // return redirect()->route('user.index');
+
+        
     }
 
     /**

@@ -62,21 +62,26 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header">{{ __('Profile') }}</div>
 
                     <div class="card-body">
                         @if (session('error'))
                             <div class="alert alert-danger">
                                 {{ session('error') }}
                             </div>
+                        @else
+                            {{ __('Selamat datang, ') }} {{ Auth::user()->name }} sebagai
+                            @if (Auth::user() && Auth::user()->is_admin == 1)
+                                Admin
+                            @else
+                                Marketing
+                            @endif
                         @endif
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        {{ __('You are logged in!') }}
                     </div>
                 </div>
             </div>

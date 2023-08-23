@@ -14,7 +14,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="icon" href="https://baltecies.com.au/dashboard/wp-content/themes/bootstrapwp/img/baltec-ies-logo.png" type="image/x-icon">
+    <link rel="icon" href="https://baltecies.com.au/dashboard/wp-content/themes/bootstrapwp/img/baltec-ies-logo.png"
+        type="image/x-icon">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -69,20 +70,34 @@
                             </ul>
                         @endif
                     @else
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">User</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('client.index') }}">Client</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('project.index') }}">Project</a>
-                            </li>
-                        </ul>
+                        @if (Auth::user() && Auth::user()->is_admin == 1)
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('home') }}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('user.index') }}">User</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('client.index') }}">Client</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('project.index') }}">Project</a>
+                                </li>
+                            </ul>
+                        @else
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ route('home') }}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('client.index') }}">Client</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('project.index') }}">Project</a>
+                                </li>
+                            </ul>
+                        @endif
                     @endguest
                 </div>
                 <!-- Right Side Of Navbar -->
@@ -119,7 +134,9 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>
