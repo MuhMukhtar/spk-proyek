@@ -35,18 +35,13 @@ class CreateUserController extends Controller
         $user = new user;
         $user->name = $request->get('name');
         $user->username = $request->get('username');
-        // $user->password = $request->get('password');
         $user->password = Hash::make($request->get('password'));
-        // Hash::make($user->password = $request->get('password'));
-        // $user->password = $request->get(Hash::make('password'));
         $user->is_admin = $request->get('is_admin');;
 
-        User::create($request->all());
-        return redirect()->route('user.index')->with('success','Product created successfully.');
+        $user->save();
 
-        // return redirect()->route('user.index');
-
-        
+        // User::create($request->all());
+        return redirect()->route('user.index')->with('success','User created successfully.');
     }
 
     /**

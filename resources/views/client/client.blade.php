@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
-        <a class="btn btn-outline-success" href="/"> +Add Client</a>
-        <br><br>
+    <a class="btn btn-outline-success" href="{{ route('createClient.index') }}"> +Add Client</a>
+    <br><br>
     <table class="table">
         <thead>
             <tr class="bg-primary text-white">
@@ -15,35 +14,39 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Muhammad Mukhtar</td>
-                <td>mukhtar</td>
-                <td>mukhtar</td>
-                <td>
-                    <a href="{{ route('editUser.index') }}">
-                        <button type="button" class="btn btn-warning">Edit</button>
-                    </a>
-                    <a href="">
-                        <button type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                    </a>
-                </td>
-            </tr>
-            {{-- @foreach ($barangs as $item)
+            @foreach ($users as $user)
                 <tr class="bg-secondary text-white">
-                    <th scope="row">{{ $item->id_barang }}</th>
-                    <td>{{ $item->kode_barang }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->kategori_barang }}</td>
-                    <td>{{ $item->harga_barang }}</td>
-                    <td>{{ $item->qty_barang }}</td>
+                    <th scope="row">{{ $user->id }}</th>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->username }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        @if ($user->is_admin == 1)
+                            Admin
+                        @else
+                            Marketing
+                        @endif
+                    </td>
+                    <td>
+                        @if ($user == Auth::user())
+                            <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                <a class="btn btn-warning" href="{{ route('user.edit', $user->id) }}">Edit</a>
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger" disabled>Delete</button>
+                            </form>
+                        @else
+                            <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                <a class="btn btn-warning" href="{{ route('user.edit', $user->id) }}">Edit</a>
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        @endif
                     </td>
                 </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
-    </div>
 @endsection

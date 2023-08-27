@@ -1,44 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <form>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="name" class="form-control" id="name" required>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Edit User</h2>
             </div>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="username" class="form-control" id="username" required>
-                {{-- <div id="username" class="form-text">We'll never share your email with anyone else.</div> --}}
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('user.index') }}"> Back</a>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label" required>Role</label>
-                <div class="form-check">
-                    &nbsp; 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="adminRole" required>
-                    <label class="form-check-label" for="adminRole">
-                        Admin
-                    </label>
-                    <br>
-                    &nbsp; 
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="marketingRole">
-                    <label class="form-check-label" for="marketingRole">
-                        Marketing
-                    </label>
+        </div>
+    </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Error!</strong> <br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('user.update', $id->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Name:</strong>
+                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{ $id->name }}"
+                        required>
                 </div>
             </div>
-            <br>
-            <a href="">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </a>
-            <a href="{{ route('user.index') }}" formnovalidate>
-                <button type="submit" formaction="{{ route('user.index') }}" class="btn btn-secondary" formnovalidate>Cancel</button>
-            </a>
-        </form>
-    </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Username:</strong>
+                    <input type="text" name="username" class="form-control" placeholder="Username"
+                        value="{{ $id->username }}" required>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Password:</strong>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <label><strong>Role:</strong></label>
+                <div class="form-group">
+                    @if ($id == Auth::user())
+                        <strong>You can't change roles on yourself</strong>
+                    @else
+                        @if ($id->is_admin == '1')
+                            <input type="radio" name="is_admin" value="1" checked>Admin
+                            <input type="radio" name="is_admin" value="0">Marketing
+                        @else
+                            <input type="radio" name="is_admin" value="1">Admin
+                            <input type="radio" name="is_admin" value="0" checked>Marketing
+                        @endif
+                    @endif
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+    </form>
+    </form>
 @endsection

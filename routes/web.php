@@ -40,16 +40,14 @@ Route::resource('about', AboutController::class);
 Route::resource('contact', ContactController::class);
 
 Route::group(['middleware' => ['admin']], function () {
-    Route::resource('user', UserController::class);
     Route::resource('createUser', CreateUserController::class);
-    Route::resource('editUser', EditUserController::class);
     Route::resource('reviewProject', ReviewProjectController::class);
-    Route::resource('editProject', EditProjectController::class);
+    Route::resource('user', UserController::class);
     Route::resource('perhitungan', PerhitunganController::class);
 });
 
+Route::resource('editUser', EditUserController::class);
 Route::resource('client', ClientController::class);
-Route::resource('editClient', EditClientController::class);
 Route::resource('createClient', CreateClientController::class);
 Route::resource('project', ProjectController::class);
 Route::resource('createProject', CreateProjectController::class);
