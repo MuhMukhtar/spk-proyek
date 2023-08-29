@@ -20,7 +20,7 @@ class EditUserController extends Controller
      */
     public function index()
     {
-        return view('admin.editUser');
+        return view('admin.editProfile');
     }
 
     /**
@@ -59,7 +59,7 @@ class EditUserController extends Controller
             abort(403);
         }
         $id = User::where('id', $id)->first();
-        return view('admin.editUser', compact('id'));
+        return view('admin.editProfile', compact('id'));
     }
 
     /**
@@ -78,13 +78,12 @@ class EditUserController extends Controller
         $user->name = $request->get('name');
         $user->username = $request->get('username');
         $user->password = Hash::make($request->get('password'));
-        $user->is_admin = $request->get('is_admin');;
+        $user->is_admin = $request->get('is_admin');
         $user->save();
     
         // $id->update();
     
-        return redirect()->view('home.index')
-                        ->with('success','User updated successfully');
+        return redirect('home')->with('success','User updated successfully');
     }
 
     /**

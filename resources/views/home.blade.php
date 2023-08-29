@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+    {{-- <div class="container-fluid"> --}}
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 
     <div class="container">
         <div class="row justify-content-center">

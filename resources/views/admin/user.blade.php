@@ -28,13 +28,8 @@
                     </td>
                     <td>
                         @if ($user == Auth::user())
-                            <form action="{{ route('user.destroy', $user->id) }}" method="POST"
-                                onsubmit="return confirm('Are you sure you want to delete this user?')">
-                                <a class="btn btn-warning" href="{{ route('user.edit', $user->id) }}">Edit</a>
-                                @csrf
-                                @method('delete')
+                                <button type="submit" class="btn btn-warning" disabled>Edit</button>
                                 <button type="submit" class="btn btn-danger" disabled>Delete</button>
-                            </form>
                         @else
                             <form action="{{ route('user.destroy', $user->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this user?')">

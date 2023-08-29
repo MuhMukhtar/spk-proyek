@@ -46,7 +46,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('perhitungan', PerhitunganController::class);
 });
 
-Route::resource('editUser', EditUserController::class);
+Route::resource('editProfile', EditUserController::class);
 Route::resource('client', ClientController::class);
 Route::resource('createClient', CreateClientController::class);
 Route::resource('project', ProjectController::class);

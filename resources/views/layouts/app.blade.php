@@ -118,7 +118,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('editUser.edit',Auth::user()->id) }}">Edit</a>
+                                <a class="dropdown-item" href="{{ route('editProfile.edit',Auth::user()->id) }}">Edit Profile</a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
