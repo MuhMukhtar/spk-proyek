@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a class="btn btn-outline-success" href="{{ route('createUser.index') }}"> +Add User</a>
+    <a class="btn btn-outline-success" href="{{ route('user.create') }}"> +Add User</a>
     <br><br>
     <table class="table">
         <thead>

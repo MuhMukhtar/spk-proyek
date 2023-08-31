@@ -5,14 +5,11 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CreateUserController;
 use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EditClientController;
 use App\Http\Controllers\CreateClientController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\EditProjectController;
-use App\Http\Controllers\CreateProjectController;
 use App\Http\Controllers\ReviewProjectController;
 use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\RankingController;
@@ -40,7 +37,6 @@ Route::resource('about', AboutController::class);
 Route::resource('contact', ContactController::class);
 
 Route::group(['middleware' => ['admin']], function () {
-    Route::resource('createUser', CreateUserController::class);
     Route::resource('reviewProject', ReviewProjectController::class);
     Route::resource('user', UserController::class);
     Route::resource('perhitungan', PerhitunganController::class);
@@ -50,6 +46,5 @@ Route::resource('editProfile', EditUserController::class);
 Route::resource('client', ClientController::class);
 Route::resource('createClient', CreateClientController::class);
 Route::resource('project', ProjectController::class);
-Route::resource('createProject', CreateProjectController::class);
 Route::resource('ranking', RankingController::class);
 

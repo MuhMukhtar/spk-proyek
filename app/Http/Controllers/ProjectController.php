@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\Client;
 
 class ProjectController extends Controller
 {
@@ -16,7 +18,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('project.project');
+        $projects = Project::all();
+        $clients = Client::all();
+        return view('project.project', compact('projects', 'clients'));
     }
 
     /**
@@ -24,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.createClient');
     }
 
     /**
@@ -32,7 +36,30 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'client_id' => 'required',
+            'project_name' => 'required',
+            'project_desc' => 'required',
+            'project_duration' => 'required',
+            'project_cost' => 'required',
+            'project_document' => 'file|mimes:pdf',
+        ]);
+
+        $project_document = $request->file('project_document');
+        $fileName = $project_document->getClientOriginalName();
+        $project_document->storeAs('public/project', $fileName);
+
+        $project = new Project;
+        $project->client_id = $request->get('client_id');
+        $project->project_name = $request->get('project_name');
+        $project->project_desc = $request->get('project_desc');
+        $project->project_duration = $request->get('project_duration');
+        $project->project_cost = $request->get('project_cost');
+        $project->project_document = $fileName;
+
+        $project->save();
+        return redirect()->route('project.index')->with('success','Project created successfully.');
+
     }
 
     /**
@@ -46,9 +73,10 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('project.editProject', compact('project'));
     }
 
     /**
@@ -56,7 +84,25 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $project = Project::find($id);
+        $project->project_name = $request->get('project_name');
+        $project->project_desc = $request->get('project_desc');
+        $project->project_duration = $request->get('project_duration');
+        $project->project_cost = $request->get('project_cost');
+
+        if ($request->hasFile('project_document')) {
+            // Menghapus file lama jika ada
+            Storage::delete('public/project/' . $project->project_document);
+    
+            // Mengunggah file baru
+            $project_document = $request->file('project_document');
+            $filename = $project_document->getClientOriginalName();
+            $project_document->storeAs('public/project', $filename);
+            $project->project_document = $filename;
+        }
+
+        $project->save();
+        return redirect()->route('project.index')->with('success','Project edited successfully.');
     }
 
     /**
@@ -64,6 +110,10 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::find($id);
+        Storage::delete('public/project/' . $project->project_document);
+        $project->delete();
+
+        return redirect()->back();
     }
 }

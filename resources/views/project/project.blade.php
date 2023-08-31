@@ -20,39 +20,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Muhammad Mukhtar</td>
-                <td>mukhtar</td>
-                <td>Muhammad Mukhtar</td>
-                <td>mukhtar</td>
-                <td>Admin</td>
-                <td>Muhammad Mukhtar</td>
-                <td>mukhtar</td>
-                <td>Admin</td>                
-                <td>
-                    <a href="{{ route('editProject.index') }}">
-                        <button type="button" class="btn btn-warning">Edit</button>
-                    </a>
-                    <a href="">
-                        <button type="button" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                    </a>
-                </td>
-            </tr>
-            {{-- @foreach ($barangs as $item)
+            @foreach ($projects as $project)
                 <tr class="bg-secondary text-white">
-                    <th scope="row">{{ $item->id_barang }}</th>
-                    <td>{{ $item->kode_barang }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->kategori_barang }}</td>
-                    <td>{{ $item->harga_barang }}</td>
-                    <td>{{ $item->qty_barang }}</td>
+                    <th scope="row">{{ $project->id }}</th>
+                    <td>{{ $project->project_name }}</td>
+                    <td>{{ $project->project_desc }}</td>
+                    <td>{{ $project->client_id }}</td>
+                    <td>{{ $project->project_document }}</td>
+                    <td>{{ $project->project_duration }}</td>
+                    <td>{{ $project->project_cost }}</td>
+                    <td>{{ $project->project_load }}</td>
+                    <td>{{ $project->project_difficult }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <form action="{{ route('project.destroy', $project->id) }}" method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this project?')">
+                            <a class="btn btn-warning" href="{{ route('project.edit', $project->id) }}">Edit</a>
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
-            @endforeach --}}
+            @endforeach
         </tbody>
     </table>
     </div>
