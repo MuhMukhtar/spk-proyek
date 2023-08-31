@@ -20,7 +20,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>10</h3>
+                        <h3>{{$projectCount}}</h3>
                         <p>Project</p>
                     </div>
                     <div class="icon">
@@ -33,7 +33,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>3</h3>
+                        <h3>{{$projectNotReview}}</h3>
                         <p>Project Belum di Review</p>
                     </div>
                     <div class="icon">
@@ -46,7 +46,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>7</h3>
+                        <h3>{{$projectReview}}</h3>
                         <p>Project Sudah di Review</p>
                     </div>
                     <div class="icon">

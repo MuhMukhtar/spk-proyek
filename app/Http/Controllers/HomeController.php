@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Project;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $clientCount = Client::count();
-        return view('home', compact('clientCount'));
+        $projectCount = Project::count();
+        $projectReview = Project::where('project_is_review','1')->count();
+        $projectNotReview = Project::where('project_is_review','0')->count();
+        return view('home', compact('clientCount', 'projectCount', 'projectReview', 'projectNotReview'));
     }
 }

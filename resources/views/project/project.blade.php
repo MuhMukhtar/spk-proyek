@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <a class="btn btn-outline-success" href="/"> Input Barang</a>
+        <a class="btn btn-outline-success" href="{{ route('project.create') }}">Input Project</a>
         <br><br>
     <table class="table">
         <thead>
@@ -25,7 +25,7 @@
                     <th scope="row">{{ $project->id }}</th>
                     <td>{{ $project->project_name }}</td>
                     <td>{{ $project->project_desc }}</td>
-                    <td>{{ $project->client_id }}</td>
+                    <td>{{ $project->pt_name }}</td>
                     <td>{{ $project->project_document }}</td>
                     <td>{{ $project->project_duration }}</td>
                     <td>{{ $project->project_cost }}</td>

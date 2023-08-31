@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Client;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -18,9 +20,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
-        $clients = Client::all();
-        return view('project.project', compact('projects', 'clients'));
+        // $projects = Project::all();
+        $projects = DB::table('projects')
+            ->join('clients', 'projects.client_id', '=', 'clients.id')
+            ->select('projects.*', 'clients.pt_name')
+            ->get();
+        return view('project.project', compact('projects'));
     }
 
     /**
@@ -28,7 +33,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('client.createClient');
+        $clients= Client::all();
+        return view('project.createProject', compact('clients'));
     }
 
     /**
@@ -42,10 +48,10 @@ class ProjectController extends Controller
             'project_desc' => 'required',
             'project_duration' => 'required',
             'project_cost' => 'required',
-            'project_document' => 'file|mimes:pdf',
+            'project_document' => 'file',
         ]);
 
-        $project_document = $request->file('project_document');
+        $project_document = $request->file('file');
         $fileName = $project_document->getClientOriginalName();
         $project_document->storeAs('public/project', $fileName);
 
@@ -111,7 +117,11 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         $project = Project::find($id);
-        Storage::delete('public/project/' . $project->project_document);
+        // Storage::delete('public/project/' . $project->project_document);
+        if ($project->project_document != null) {
+            // Menghapus file jika ada
+            Storage::delete('public/project/' . $project->project_document);
+        }
         $project->delete();
 
         return redirect()->back();

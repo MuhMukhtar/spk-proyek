@@ -8,7 +8,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EditUserController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EditClientController;
-use App\Http\Controllers\CreateClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReviewProjectController;
 use App\Http\Controllers\PerhitunganController;
@@ -44,7 +43,6 @@ Route::group(['middleware' => ['admin']], function () {
 
 Route::resource('editProfile', EditUserController::class);
 Route::resource('client', ClientController::class);
-Route::resource('createClient', CreateClientController::class);
 Route::resource('project', ProjectController::class);
 Route::resource('ranking', RankingController::class);
 
