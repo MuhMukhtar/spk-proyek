@@ -84,6 +84,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('project.index') }}">Project</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('reviewProject.index') }}">Project Review</a>
+                                </li>
                             </ul>
                         @else
                             <ul class="navbar-nav">

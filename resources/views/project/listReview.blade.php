@@ -1,0 +1,30 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr class="bg-primary text-white">
+                    <th scope="col">Id</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($projects as $project)
+                    <tr class="bg-secondary text-white">
+                        <th scope="row">{{ $project->id }}</th>
+                        <td>{{ $project->project_name }}</td>
+                        <td>{{ $project->project_desc }}</td>
+                        <td>{{ $project->pt_name }}</td>
+                        <td>
+                            <a class="btn btn-warning" href="{{ route('reviewProject.edit', $project->id) }}">Review</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+@endsection

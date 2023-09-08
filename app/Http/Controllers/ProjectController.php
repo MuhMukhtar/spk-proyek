@@ -8,6 +8,8 @@ use App\Models\Project;
 use App\Models\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use View;
+use PDF;
 
 class ProjectController extends Controller
 {
@@ -71,9 +73,16 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $projects = Project::findOrFail($id);
+        $clients = Client::findOrFail($projects->client_id);
+        // $clients = DB::table('clients')
+        // ->join('projects', 'projects.client_id', '=', 'clients.id')
+        // ->select('projects.*', 'clients.pt_name')
+        // ->get();
+        // return response()->file($pathToFile);
+        return view('project.showProject', compact('projects', 'clients'));
     }
 
     /**
@@ -81,8 +90,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::findOrFail($id);
-        return view('project.editProject', compact('project'));
+        $id = Project::findOrFail($id);
+        $client = Client::findOrFail($id->client_id);
+        return view('project.editProject', compact('id', 'client'));
     }
 
     /**
@@ -91,14 +101,21 @@ class ProjectController extends Controller
     public function update(Request $request, string $id)
     {
         $project = Project::find($id);
+        $project_document = $request->file('file');
+        $fileName = $project_document->getClientOriginalName();
+        $project_document->storeAs('public/project', $fileName);
+
         $project->project_name = $request->get('project_name');
         $project->project_desc = $request->get('project_desc');
         $project->project_duration = $request->get('project_duration');
         $project->project_cost = $request->get('project_cost');
-
+        $project->project_load = $request->get('project_load');
+        $project->project_difficult = $request->get('project_difficult');
+        
+        $project->project_document = $fileName;
         if ($request->hasFile('project_document')) {
             // Menghapus file lama jika ada
-            Storage::delete('public/project/' . $project->project_document);
+            Storage::delete('/storage/project/' . $project->project_document);
     
             // Mengunggah file baru
             $project_document = $request->file('project_document');
