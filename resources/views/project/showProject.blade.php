@@ -17,6 +17,7 @@
             <div class="card-body">
                 <h3 class="card-title text-primary">{{ $projects->project_name }}</h3>
                 <h6 class="card-title text-secondary">Client: {{ $clients->pt_name }}</h6>
+                <br>
                 <p class="card-text">{{ $projects->project_desc }}</p>
                 <div class="form-group">
                     <strong>Variables:</strong>

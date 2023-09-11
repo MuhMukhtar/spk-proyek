@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <table class="table">
             <thead>
                 <tr class="bg-primary text-white">
@@ -17,7 +17,7 @@
                     <tr class="bg-secondary text-white">
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->project_name }}</td>
-                        <td>{{ $project->project_desc }}</td>
+                        <td>{{ Str::limit($project->project_desc, 40); }}</td>
                         <td>{{ $project->pt_name }}</td>
                         <td>
                             <a class="btn btn-warning" href="{{ route('reviewProject.edit', $project->id) }}">Review</a>

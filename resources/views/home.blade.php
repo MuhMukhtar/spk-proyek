@@ -1,26 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- <div class="container-fluid"> --}}
+    <div class="container">
+        {{-- <div class="container-fluid"> --}}
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{$clientCount}}</h3>
+                        <h3>{{ $clientCount }}</h3>
                         <p>clients</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person"></i>
                     </div>
-                    <a href="{{ route('client.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('client.index') }}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{$projectCount}}</h3>
+                        <h3>{{ $projectCount }}</h3>
                         <p>Project</p>
                     </div>
                     <div class="icon">
@@ -33,7 +35,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{$projectNotReview}}</h3>
+                        <h3>{{ $projectNotReview }}</h3>
                         <p>Project Belum di Review</p>
                     </div>
                     <div class="icon">
@@ -46,7 +48,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{$projectReview}}</h3>
+                        <h3>{{ $projectReview }}</h3>
                         <p>Project Sudah di Review</p>
                     </div>
                     <div class="icon">
@@ -56,32 +58,33 @@
                 </div>
             </div>
         </div>
-    {{-- </div> --}}
+        {{-- </div> --}}
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Profile') }}</div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">{{ __('Profile') }}</div>
 
-                    <div class="card-body">
-                        @if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @else
-                            {{ __('Selamat datang, ') }} {{ Auth::user()->name }} sebagai
-                            @if (Auth::user() && Auth::user()->is_admin == 1)
-                                Admin
+                        <div class="card-body">
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
                             @else
-                                Marketing
+                                {{ __('Selamat datang, ') }} {{ Auth::user()->name }} sebagai
+                                @if (Auth::user() && Auth::user()->is_admin == 1)
+                                    Admin
+                                @else
+                                    Marketing
+                                @endif
                             @endif
-                        @endif
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
