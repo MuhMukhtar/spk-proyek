@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body>
+<body style="background-color: #F7F7F7;">
     <div id="app">
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
             <div class="container-fluid">
@@ -70,34 +70,30 @@
                             </ul>
                         @endif
                     @else
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('home') }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('client.index') }}">Client</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('project.index') }}">Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('ranking.index') }}">Ranking</a>
+                            </li>
+                        </ul>
                         @if (Auth::user() && Auth::user()->is_admin == 1)
                             <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{ route('home') }}">Dashboard</a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('user.index') }}">User</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('client.index') }}">Client</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('project.index') }}">Project</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="{{ route('reviewProject.index') }}">Project Review</a>
                                 </li>
-                            </ul>
-                        @else
-                            <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="{{ route('home') }}">Dashboard</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('client.index') }}">Client</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('project.index') }}">Project</a>
+                                    <a class="nav-link" href="{{ route('perhitungan.index') }}">Perhitungan</a>
                                 </li>
                             </ul>
                         @endif
@@ -121,7 +117,8 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('editProfile.edit',Auth::user()->id) }}">Edit Profile</a>
+                                <a class="dropdown-item" href="{{ route('editProfile.edit', Auth::user()->id) }}">Edit
+                                    Profile</a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
@@ -139,7 +136,7 @@
         </nav>
 
         <main class="py-4">
-                @yield('content')
+            @yield('content')
         </main>
     </div>
 </body>

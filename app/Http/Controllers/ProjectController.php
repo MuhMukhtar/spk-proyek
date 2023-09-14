@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Client;
 use App\Models\Perhitungan;
+use App\Models\BobotKriteria;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use View;
@@ -104,6 +105,7 @@ class ProjectController extends Controller
     public function update(Request $request, string $id)
     {
         $project = Project::find($id);
+        $bobot = BobotKriteria::find(1);
         if ($request->hasFile('project_document')) {
             $project_document = $request->file('file');
             $fileName = $project_document->getClientOriginalName();
@@ -238,10 +240,10 @@ class ProjectController extends Controller
             // $bobot = BobotKriteria::find(1);
             // number_format($duration_ut_bobot, 2, '.', '');
 
-            $duration_ut_bobot = $duration_utility * 0.3;
-            $cost_ut_bobot = $cost_utility * 0.25;
-            $load_ut_bobot = $load_utility * 0.3;
-            $difficult_ut_bobot = $difficult_utility * 0.15;
+            $duration_ut_bobot = $duration_utility * $bobot->bobot_duration;
+            $cost_ut_bobot = $cost_utility * $bobot->bobot_cost;
+            $load_ut_bobot = $load_utility * $bobot->bobot_load;
+            $difficult_ut_bobot = $difficult_utility * $bobot->bobot_difficult;
 
             $perhitungan->duration_ut_bobot = number_format($duration_ut_bobot, 2, '.', '');
             $perhitungan->cost_ut_bobot = number_format($cost_ut_bobot, 2, '.', '');

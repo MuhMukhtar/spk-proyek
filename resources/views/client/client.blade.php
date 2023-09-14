@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                 @foreach ($clients as $client)
-                    <tr class="bg-secondary text-white">
+                    <tr class="bg-light text-dark">
                         <th scope="row">{{ $client->id }}</th>
                         <td>{{ $client->pt_name }}</td>
                         <td>{{ $client->person_name }}</td>

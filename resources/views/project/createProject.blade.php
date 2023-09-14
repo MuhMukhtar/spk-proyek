@@ -8,7 +8,7 @@
                 <h2>New Project</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('client.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('project.index') }}"> Back</a>
             </div>
         </div>
     </div>

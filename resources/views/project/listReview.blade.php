@@ -9,17 +9,17 @@
                     <th scope="col">Project Name</th>
                     <th scope="col">Description</th>
                     <th scope="col">Client</th>
-                    <th scope="col">Action</th>
+                    <th class="text-center" scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($projects as $project)
-                    <tr class="bg-secondary text-white">
+                    <tr class="bg-light text-dark">
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->project_name }}</td>
                         <td>{{ Str::limit($project->project_desc, 40); }}</td>
                         <td>{{ $project->pt_name }}</td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-warning" href="{{ route('reviewProject.edit', $project->id) }}">Review</a>
                         </td>
                     </tr>

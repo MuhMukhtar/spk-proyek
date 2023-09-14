@@ -12,6 +12,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ReviewProjectController;
 use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\RankingController;
+use App\Http\Controllers\BobotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('reviewProject', ReviewProjectController::class);
     Route::resource('user', UserController::class);
     Route::resource('perhitungan', PerhitunganController::class);
+    Route::resource('bobot', BobotController::class);
 });
 
 Route::resource('editProfile', EditUserController::class);

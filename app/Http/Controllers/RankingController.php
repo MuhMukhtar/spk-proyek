@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Perhitungan;
+use App\Models\Project;
+use App\Models\Client;
+use Illuminate\Support\Facades\DB;
 
 class RankingController extends Controller
 {
@@ -16,7 +20,14 @@ class RankingController extends Controller
      */
     public function index()
     {
-        return view('perhitungan.ranking');
+        $perhitungan = DB::table('perhitungans')
+            ->join('projects', 'perhitungans.project_id', '=', 'projects.id')
+            ->join('clients', 'projects.client_id', '=', 'clients.id')
+            ->select('perhitungans.*', 'projects.project_name', 'clients.pt_name')
+            ->orderBy('nilai_akhir', 'desc')
+            ->get();
+
+        return view('perhitungan.ranking', compact('perhitungan'));
     }
 
     /**
