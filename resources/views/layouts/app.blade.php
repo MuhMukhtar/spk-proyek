@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body style="background-color: #F7F7F7;">
+<body style="background-color: #F7F7F7; min-height: 100vh; display: flex; flex-direction: column;">
     <div id="app">
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd;">
             <div class="container-fluid">
@@ -139,6 +139,8 @@
             @yield('content')
         </main>
     </div>
+
+    @include('layouts.footer')
 </body>
 
 </html>
