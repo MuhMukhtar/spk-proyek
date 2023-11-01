@@ -48,3 +48,7 @@ Route::resource('client', ClientController::class);
 Route::resource('project', ProjectController::class);
 Route::resource('ranking', RankingController::class);
 
+
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});
