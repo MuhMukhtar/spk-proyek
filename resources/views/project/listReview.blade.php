@@ -17,7 +17,7 @@
                     <tr class="bg-light text-dark">
                         <th scope="row">{{ $project->id }}</th>
                         <td>{{ $project->project_name }}</td>
-                        <td>{{ Str::limit($project->project_desc, 40); }}</td>
+                        <td>{{ Str::limit($project->project_desc, 40) }}</td>
                         <td>{{ $project->pt_name }}</td>
                         <td class="text-center">
                             <a class="btn btn-warning" href="{{ route('reviewProject.edit', $project->id) }}">Review</a>
