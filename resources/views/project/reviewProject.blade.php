@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('reviewProject.update', $id->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('reviewProject.update', $id->id) }}" method="POST" enctype="multipart/form-data"
+            onsubmit="return confirm('Are you sure you want to submit this project?')">
             @csrf
             @method('PUT')
             <div class="mb-3 row">

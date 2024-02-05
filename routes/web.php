@@ -13,6 +13,8 @@ use App\Http\Controllers\ReviewProjectController;
 use App\Http\Controllers\PerhitunganController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\BobotController;
+use App\Models\Project;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +50,4 @@ Route::resource('client', ClientController::class);
 Route::resource('project', ProjectController::class);
 Route::resource('ranking', RankingController::class);
 
+Route::put('/project/{id}/projectComplete', [ProjectController::class, 'projectComplete'])->name('project.projectComplete');

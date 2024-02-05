@@ -6,7 +6,7 @@
             <div class="p-3">
                 <h2>Ranking Prioritas Project</h2>
                 <table class="table table-hover user-select-none" style="margin-left: auto; margin-right: auto;">
-                    <caption class="text-primary">Nilai Akhir</caption>
+                    {{-- <caption class="text-primary">Nilai Akhir</caption> --}}
                     <thead>
                         <tr>
                             <th scope="col">Rank</th>

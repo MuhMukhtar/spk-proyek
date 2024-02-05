@@ -10,6 +10,17 @@
                 </div>
                 <div class="pull-right">
                     <a class="btn btn-primary" href="{{ route('project.index') }}"> Back</a>
+
+                    @if (Auth::user() && Auth::user()->is_admin == 1)
+                        @if ($id->project_is_review == 1)
+                            <form action="{{ route('project.projectComplete', $id->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to mark this project to complete?')">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="btn btn-success">Project Completed</button>
+                            </form>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>

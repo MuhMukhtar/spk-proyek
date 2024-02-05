@@ -11,7 +11,7 @@
                     <th scope="col">Project Name</th>
                     <th scope="col">Description</th>
                     <th scope="col">Client</th>
-                    <th class="text-center" scope="col">Review Status</th>
+                    <th class="text-center" scope="col">Status</th>
                     <th class="text-center" scope="col">Action</th>
                 </tr>
             </thead>
@@ -28,6 +28,10 @@
                                 <ion-icon name="checkmark-circle-outline"
                                     style="display: inline-block; font-size: 24px; color: rgb(20, 144, 20); vertical-align: middle;"></ion-icon>
                                 <span style="display: inline-block; vertical-align: middle;">Reviewed</span>
+                            @elseif ($project->project_is_review == 2)
+                                <ion-icon name="checkmark-done-circle-outline"
+                                    style="display: inline-block; font-size: 24px; color: rgb(32, 67, 255); vertical-align: middle;"></ion-icon>
+                                <span style="display: inline-block; vertical-align: middle;">Completed</span>
                             @else
                                 <ion-icon name="close-circle-outline"
                                     style="display: inline-block; font-size: 24px; color: #cc3636; vertical-align: middle;"></ion-icon>
@@ -51,6 +55,12 @@
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger disabled">Delete</button>
                                     @endif
+                                @elseif ($project->project_is_review == 2)
+                                    <a class="btn btn-warning disabled"
+                                        href="{{ route('project.edit', $project->id) }}">Edit</a>
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
                                 @else
                                     <a class="btn btn-warning" href="{{ route('project.edit', $project->id) }}">Edit</a>
                                     @csrf

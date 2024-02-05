@@ -9,7 +9,7 @@
 
                     <div class="card-body text-center">
                         <p class="text-muted">Maaf, saat ini tidak ada data yang tersedia.</p>
-                        <a href="javascript:history.back()" class="btn btn-primary">Kembali ke Halaman Sebelumnya</a>
+                        <a href="{{ route('home') }}" class="btn btn-primary">Kembali ke Halaman Utama</a>
                     </div>
                 </div>
             </div>

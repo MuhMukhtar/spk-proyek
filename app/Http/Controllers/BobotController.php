@@ -8,6 +8,7 @@ use App\Models\BobotKriteria;
 use App\Models\Perhitungan;
 use App\Models\Project;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Log;
 
 class BobotController extends Controller
 {
@@ -62,36 +63,44 @@ class BobotController extends Controller
         $newCost = $request->get('cost');
         $newLoad = $request->get('load');
         $newDifficult = $request->get('difficult');
+        $total = $newDuration + $newCost + $newLoad + $newDifficult;
 
-        $bobot->bobot_duration = $newDuration;
-        $bobot->bobot_cost = $newCost;
-        $bobot->bobot_load = $newLoad;
-        $bobot->bobot_difficult = $newDifficult;
-        $bobot->save();
-    
-
-        $perhitungan = Perhitungan::all();
+        if ($total == 1) {
+            $bobot->bobot_duration = $newDuration;
+            $bobot->bobot_cost = $newCost;
+            $bobot->bobot_load = $newLoad;
+            $bobot->bobot_difficult = $newDifficult;
+            $bobot->save();
         
-        foreach ($perhitungan as $d) {
-            $duration_ut_bobot = $d->duration_utility * $newDuration;
-            $cost_ut_bobot = $d->cost_utility * $newCost;
-            $load_ut_bobot = $d->load_utility * $newLoad;
-            $difficult_ut_bobot = $d->difficult_utility * $newDifficult;
 
-            $d->duration_ut_bobot = number_format($duration_ut_bobot, 2, '.', '');
-            $d->cost_ut_bobot = number_format($cost_ut_bobot, 2, '.', '');
-            $d->load_ut_bobot = number_format($load_ut_bobot, 2, '.', '');
-            $d->difficult_ut_bobot = number_format($difficult_ut_bobot, 2, '.', '');
+            $perhitungan = Perhitungan::all();
             
-            // Nlai akhir (SUM)
-            $nilai_akhir = $duration_ut_bobot + $cost_ut_bobot + $load_ut_bobot + $difficult_ut_bobot;
-            $d->nilai_akhir = number_format($nilai_akhir, 2, '.', '');;
-            $d->save();
+            foreach ($perhitungan as $d) {
+                $duration_ut_bobot = $d->duration_utility * $newDuration;
+                $cost_ut_bobot = $d->cost_utility * $newCost;
+                $load_ut_bobot = $d->load_utility * $newLoad;
+                $difficult_ut_bobot = $d->difficult_utility * $newDifficult;
+
+                $d->duration_ut_bobot = number_format($duration_ut_bobot, 2, '.', '');
+                $d->cost_ut_bobot = number_format($cost_ut_bobot, 2, '.', '');
+                $d->load_ut_bobot = number_format($load_ut_bobot, 2, '.', '');
+                $d->difficult_ut_bobot = number_format($difficult_ut_bobot, 2, '.', '');
+                
+                // Nlai akhir (SUM)
+                $nilai_akhir = $duration_ut_bobot + $cost_ut_bobot + $load_ut_bobot + $difficult_ut_bobot;
+                $d->nilai_akhir = number_format($nilai_akhir, 2, '.', '');;
+                $d->save();
+            }
+
+            return redirect()->route('perhitungan.index');
+        } else {
+            return redirect()->back()->with(['alert' => 'JUMLAH BOBOT MAKSIMAL BERNILAI 1.00']);
+            // return redirect()->back();
+            // return redirect()->back()->with('alert', 'JUMLAH BOBOT TIDAK BOLEH LEBIH DARI 1');
+            // $message = "wrong answer";
+            // echo "<script type='text/javascript'>alert('$message');</script>";
         }
-
-        return redirect()->route('perhitungan.index');
     }
-
     /**
      * Remove the specified resource from storage.
      */

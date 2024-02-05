@@ -188,10 +188,10 @@ class ReviewProjectController extends Controller
             $cMax = MAX($duration_skor, $cost_skor, $load_skor, $difficult_skor); // Mencari C Max
             $cMin = MIN($duration_skor, $cost_skor, $load_skor, $difficult_skor); // Mencari C Min
 
-            $duration_utility = 100 * (($cMax - $duration_skor) / ($cMax - $cMin));
-            $cost_utility = 100 * (($cMax - $cost_skor) / ($cMax - $cMin));
-            $load_utility = 100 * (($cMax - $load_skor) / ($cMax - $cMin));
-            $difficult_utility = 100 * (($cMax - $difficult_skor) / ($cMax - $cMin));
+            $duration_utility = 100 * (($duration_skor - $cMin) / ($cMax - $cMin)); // benefit
+            $cost_utility = 100 * (($cMax - $cost_skor) / ($cMax - $cMin)); // cost
+            $load_utility = 100 * (($cMax - $load_skor) / ($cMax - $cMin)); // cost
+            $difficult_utility = 100 * (($difficult_skor - $cMin) / ($cMax - $cMin)); //benefit
 
             $perhitungan->duration_utility = number_format($duration_utility, 2, '.', '');
             $perhitungan->cost_utility = number_format($cost_utility, 2, '.', '');

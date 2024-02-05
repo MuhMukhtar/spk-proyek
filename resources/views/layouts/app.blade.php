@@ -78,7 +78,7 @@
                                 <a class="nav-link" href="{{ route('client.index') }}">Client</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('project.index') }}">Project</a>
+                                <a class="nav-link" href="{{ route('project.index') }}/">Project</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('ranking.index') }}">Ranking</a>

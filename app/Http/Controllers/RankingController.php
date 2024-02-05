@@ -23,7 +23,8 @@ class RankingController extends Controller
         $perhitungan = DB::table('perhitungans')
             ->join('projects', 'perhitungans.project_id', '=', 'projects.id')
             ->join('clients', 'projects.client_id', '=', 'clients.id')
-            ->select('perhitungans.*', 'projects.project_name', 'clients.pt_name')
+            ->select('perhitungans.*', 'projects.project_name', 'clients.pt_name', 'projects.project_is_review')
+            ->where('projects.project_is_review', '=', '1')
             ->orderBy('nilai_akhir', 'desc')
             ->get();
 
