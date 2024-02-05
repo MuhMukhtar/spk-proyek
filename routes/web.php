@@ -51,3 +51,7 @@ Route::resource('project', ProjectController::class);
 Route::resource('ranking', RankingController::class);
 
 Route::put('/project/{id}/projectComplete', [ProjectController::class, 'projectComplete'])->name('project.projectComplete');
+
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});
